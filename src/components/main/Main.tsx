@@ -7,21 +7,30 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Button } from "@mui/material";
 
 import { decrement, asyncIncrementCreator } from "../../redux/actions/counter";
 import { IRootStore } from "../../redux";
 import { fetchUsers } from "../../redux/actions/users";
+
+import "./style.scss";
 
 const Main = () => {
   const dispatch = useDispatch();
   const { counter } = useSelector((state: IRootStore) => state.counter);
   const { users } = useSelector((state: IRootStore) => state.users);
   return (
-    <div>
+    <div className="main">
       <div>
-        <button onClick={() => dispatch(asyncIncrementCreator())}>increment</button>
-        <button onClick={() => dispatch(decrement())}>decrement</button>
-        <button onClick={() => dispatch(fetchUsers())}>get users</button>
+        <Button variant="outlined" onClick={() => dispatch(asyncIncrementCreator())}>
+          increment
+        </Button>
+        <Button variant="outlined" onClick={() => dispatch(decrement())}>
+          decrement
+        </Button>
+        <Button variant="outlined" onClick={() => dispatch(fetchUsers())}>
+          get users
+        </Button>
         <span>{counter}</span>
       </div>
       <div>
