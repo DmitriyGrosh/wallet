@@ -39,8 +39,6 @@ const AuthContainer: FC<IAuthContainer> = ({ setIsAuth }) => {
     resolver: yupResolver(schema),
   });
 
-  console.log("==========>errors", errors);
-
   const onSubmit: SubmitHandler<IFormInputs> = () => {
     setIsAuth(true);
     localStorage.setItem("isAuth", "1");
