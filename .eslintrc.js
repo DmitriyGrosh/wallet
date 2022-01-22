@@ -23,7 +23,7 @@ module.exports = {
   plugins: ["react", "jsx-a11y", "@typescript-eslint"],
   rules: {
     "no-unused-vars": "off",
-    "react-hooks/exhaustive-deps": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "no-var": "error",
     "brace-style": "error",
     "prefer-template": "error",

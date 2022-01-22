@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -31,6 +31,7 @@ const schema = yup
 
 const AuthContainer: FC<IAuthContainer> = ({ setIsAuth }) => {
   const navigate = useNavigate();
+  const [test, setTest] = useState(false);
   const {
     register,
     handleSubmit,
@@ -50,6 +51,7 @@ const AuthContainer: FC<IAuthContainer> = ({ setIsAuth }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Box display="flex" flexDirection="column">
             <TextField
+              data-testid="name"
               color="primary"
               error={!!errors.name}
               variant="filled"
@@ -60,7 +62,9 @@ const AuthContainer: FC<IAuthContainer> = ({ setIsAuth }) => {
                 ...register("name"),
               }}
             />
+            {errors.name?.message && <span>{errors.name?.message}</span>}
             <TextField
+              data-testid="email"
               color="primary"
               error={!!errors.email}
               variant="filled"
@@ -72,6 +76,7 @@ const AuthContainer: FC<IAuthContainer> = ({ setIsAuth }) => {
               }}
             />
             <TextField
+              data-testid="password"
               type="password"
               color="primary"
               error={!!errors.password}
@@ -83,7 +88,12 @@ const AuthContainer: FC<IAuthContainer> = ({ setIsAuth }) => {
                 ...register("password"),
               }}
             />
-            <Button type="submit">send</Button>
+            {/* eslint-disable-next-line jsx-a11y/aria-role */}
+            <Button role="submit" type="submit">
+              send
+            </Button>
+            <Button onClick={() => setTest(true)}>Test</Button>
+            {test && <span>required</span>}
           </Box>
         </form>
       </div>
