@@ -54,12 +54,6 @@ const AuthContainer: FC<IAuthContainer> = ({ setIsAuth }) => {
       return !prevState;
     });
   };
-
-  useEffect(() => {
-    console.log("==========>1", 1);
-  }, []);
-
-  console.log("==========>rerender", location);
   return (
     <div>
       <div>
