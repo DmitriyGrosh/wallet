@@ -1,9 +1,10 @@
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import React, { Dispatch, FC, SetStateAction, useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Box, Button, TextField } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
+import AuthState from "./AuthState";
 
 interface IAuthContainer {
   setIsAuth: Dispatch<SetStateAction<boolean>>;
@@ -31,7 +32,6 @@ const schema = yup
 
 const AuthContainer: FC<IAuthContainer> = ({ setIsAuth }) => {
   const location = useLocation();
-  console.log("==========>location", location);
   const navigate = useNavigate();
   const [test, setTest] = useState(false);
   const {
@@ -47,6 +47,19 @@ const AuthContainer: FC<IAuthContainer> = ({ setIsAuth }) => {
     localStorage.setItem("isAuth", "1");
     navigate("/");
   };
+
+  const changeState = () => {
+    setTest((prevState) => {
+      console.log("==========>prevState", prevState);
+      return !prevState;
+    });
+  };
+
+  useEffect(() => {
+    console.log("==========>1", 1);
+  }, []);
+
+  console.log("==========>rerender", location);
   return (
     <div>
       <div>
@@ -94,8 +107,9 @@ const AuthContainer: FC<IAuthContainer> = ({ setIsAuth }) => {
             <Button role="submit" type="submit">
               send
             </Button>
-            <Button onClick={() => setTest(true)}>Test</Button>
+            <Button onClick={changeState}>Test</Button>
             {test && <span>required</span>}
+            <AuthState setTest={setTest} />
           </Box>
         </form>
       </div>
