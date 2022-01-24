@@ -10,6 +10,7 @@ import Router from "./router/Router";
 import "./App.scss";
 import UnauthorizedRouter from "./router/UnauthorizedRouter";
 import AuthorizedRouter from "./router/AuthorizedRouter";
+import TestRouter from "./router/TestRouter";
 
 interface ILogout {
   setIsAuth: Dispatch<SetStateAction<boolean>>;
@@ -37,6 +38,7 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
+        {/*<TestRouter />*/}
         <Routes>
           <Route path="/logout" element={<Logout setIsAuth={setIsAuth} />} />
         </Routes>

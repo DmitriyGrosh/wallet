@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Box, Button, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface IAuthContainer {
   setIsAuth: Dispatch<SetStateAction<boolean>>;
@@ -30,6 +30,8 @@ const schema = yup
   .required();
 
 const AuthContainer: FC<IAuthContainer> = ({ setIsAuth }) => {
+  const location = useLocation();
+  console.log("==========>location", location);
   const navigate = useNavigate();
   const [test, setTest] = useState(false);
   const {
